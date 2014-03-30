@@ -92,6 +92,11 @@
     [ctx evaluateScript:filesCode];
     
     NSArray *fileRecords = [ctx[@"files"] toArray];
+    
+    // Don't include the '.' and '..' items, which are always the first two.
+    if (fileRecords.count >= 2)
+        fileRecords = [fileRecords subarrayWithRange:NSMakeRange(2, fileRecords.count - 2)];
+    
     NSMutableArray *files = [[NSMutableArray alloc] initWithCapacity:fileRecords.count];
     
     for (NSDictionary *fileRec in fileRecords)
