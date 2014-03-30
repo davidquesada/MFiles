@@ -12,7 +12,7 @@
 
 +(instancetype)sharedClient;
 
-@property NSString *uniqname;
+@property(readonly) NSString *uniqname;
 
 -(void)getFilesAtPath:(NSString *)path withCompletionHandler:(void (^)(NSArray *filenames))completion;
 

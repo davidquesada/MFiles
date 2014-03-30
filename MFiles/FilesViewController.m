@@ -7,8 +7,8 @@
 //
 
 #import "FilesViewController.h"
-
 #import "MFileClient.h"
+#import "File.h"
 
 @interface FilesViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property NSString *path;
@@ -46,14 +46,17 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    MFileClient *client = [MFileClient sharedClient];
-    [client getFilesAtPath:_path withCompletionHandler:^(NSArray *filenames) {
-        self.items = filenames;
-        [self.tableView reloadData];
-    }];
+    [super viewWillAppear:animated];
+    if (!_items)
+    {
+        MFileClient *client = [MFileClient sharedClient];
+        [client getFilesAtPath:_path withCompletionHandler:^(NSArray *filenames) {
+            self.items = filenames;
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 /*
@@ -81,10 +84,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *item = _items[indexPath.row];
+    File *item = _items[indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"2"];
     
-    cell.textLabel.text = item;
+    cell.textLabel.text = item.title;
     
     return cell;
 }
@@ -92,8 +95,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSString *item = _items[indexPath.row];
-    NSString *path = [_path stringByAppendingPathComponent:item];
+    File *item = _items[indexPath.row];
+    NSString *path = [_path stringByAppendingPathComponent:item.title];
     FilesViewController *next = [[FilesViewController alloc] initWithPath:path];
     [self.navigationController pushViewController:next animated:YES];
 }

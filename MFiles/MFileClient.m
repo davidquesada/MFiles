@@ -7,10 +7,12 @@
 //
 
 #import "MFileClient.h"
+#import "File.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
 @interface MFileClient ()
 
+@property(readwrite) NSString *uniqname;
 -(NSMutableArray *)itemsForResponseData:(NSData *)data;
 
 @end
@@ -77,7 +79,7 @@
         this.date	  = date * 1; // The modify date of the item    \n\
         // multiply by 1 to cast to an int                          \n\
         this.size	  = size;	 // The size of the item            \n\
-        this.selected  = selected; // Is the item selected?         \n\
+        //this.selected  = selected; // Is the item selected?         \n\
         this.type	  = type;	 // The file type of the item       \n\
     }\n\n";
     
@@ -85,18 +87,17 @@
     
     
     filesCode = [codeHeader stringByAppendingString:filesCode];
-    //filesCode = [filesCode stringByReplacingOccurrencesOfString:@"files = " withString:@"var files = "];
-    
-    NSLog(@"Code: %@", filesCode);
     
     JSContext *ctx = [[JSContext alloc] initWithVirtualMachine:[[JSVirtualMachine alloc] init]];
     [ctx evaluateScript:filesCode];
     
-    NSArray *files = [ctx[@"files"] toArray];
+    NSArray *fileRecords = [ctx[@"files"] toArray];
+    NSMutableArray *files = [[NSMutableArray alloc] initWithCapacity:fileRecords.count];
     
-    NSMutableArray *names = [[files valueForKey:@"title"] mutableCopy];
+    for (NSDictionary *fileRec in fileRecords)
+        [files addObject:[[File alloc] initWithJSObject:fileRec]];
     
-    return names;
+    return files;
 }
 
 @end

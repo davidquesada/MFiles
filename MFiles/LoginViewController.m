@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
+//ShouldStartLoad: https://mfile.umich.edu/perm_manager.php?target=%2Fafs%2Fumich.edu%2Fuser%2Fd%2Fq%2Fdquesada
+
 #import "LoginViewController.h"
 
 @interface LoginViewController ()<UIWebViewDelegate>
