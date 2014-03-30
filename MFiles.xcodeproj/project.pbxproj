@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		635F072418E8A42200F20A0C /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 635F072318E8A42200F20A0C /* File.m */; };
+		635F072718E8AFEA00F20A0C /* UMCosignManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 635F072618E8AFEA00F20A0C /* UMCosignManager.m */; };
 		B24D651F18E54D4D0013BAE0 /* MFileClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B24D651E18E54D4D0013BAE0 /* MFileClient.m */; };
 		B24D652218E54F420013BAE0 /* FilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24D652118E54F420013BAE0 /* FilesViewController.m */; };
 		B24D652418E552940013BAE0 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24D652318E552940013BAE0 /* JavaScriptCore.framework */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		635F072218E8A42200F20A0C /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Model/File.h; sourceTree = "<group>"; };
 		635F072318E8A42200F20A0C /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Model/File.m; sourceTree = "<group>"; };
+		635F072518E8AFEA00F20A0C /* UMCosignManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMCosignManager.h; sourceTree = "<group>"; };
+		635F072618E8AFEA00F20A0C /* UMCosignManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMCosignManager.m; sourceTree = "<group>"; };
 		B24D651D18E54D4D0013BAE0 /* MFileClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFileClient.h; sourceTree = "<group>"; };
 		B24D651E18E54D4D0013BAE0 /* MFileClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFileClient.m; sourceTree = "<group>"; };
 		B24D652018E54F420013BAE0 /* FilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesViewController.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				B24D651E18E54D4D0013BAE0 /* MFileClient.m */,
 				B24D652018E54F420013BAE0 /* FilesViewController.h */,
 				B24D652118E54F420013BAE0 /* FilesViewController.m */,
+				635F072518E8AFEA00F20A0C /* UMCosignManager.h */,
+				635F072618E8AFEA00F20A0C /* UMCosignManager.m */,
 			);
 			path = MFiles;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				B24D652218E54F420013BAE0 /* FilesViewController.m in Sources */,
 				B26EB37C18E5420800904092 /* main.m in Sources */,
 				B26EB38918E5420800904092 /* DetailViewController.m in Sources */,
+				635F072718E8AFEA00F20A0C /* UMCosignManager.m in Sources */,
 				B26EB3A918E5424100904092 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

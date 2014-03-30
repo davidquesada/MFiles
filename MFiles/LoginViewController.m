@@ -6,15 +6,13 @@
 //  Copyright (c) 2014 David Quesada. All rights reserved.
 //
 
-//ShouldStartLoad: https://mfile.umich.edu/perm_manager.php?target=%2Fafs%2Fumich.edu%2Fuser%2Fd%2Fq%2Fdquesada
-
 #import "LoginViewController.h"
+#import "UMCosignManager.h"
 
 @interface LoginViewController ()<UIWebViewDelegate>
 {
     UIWebView *_webView;
     BOOL _didAuth;
-    BOOL _hasLoadedRedirect;
 }
 
 -(void)dismiss:(id)sender;
@@ -35,7 +33,7 @@
     if (self)
     {
         _webView.delegate = self;
-        NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://mfile.umich.edu"]];
+        NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://weblogin.umich.edu/?cosign-mfile.umich.edu&https://mfile.umich.edu/"]];
         [_webView loadRequest:req];
     }
     
@@ -58,13 +56,10 @@
     
     if ([request.URL.description isEqualToString:@"https://mfile.umich.edu/"])
     {
-        if (_hasLoadedRedirect)
-        {
-            _didAuth = YES;
-            [self dismiss:nil];
-            return YES;
-        }
-        _hasLoadedRedirect = YES;
+        _didAuth = YES;
+        [[UMCosignManager sharedManager] writeCookiesToUserDefaults];
+        [self dismiss:nil];
+        return YES;
     }
     
     return YES;
