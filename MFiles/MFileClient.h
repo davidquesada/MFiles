@@ -15,5 +15,6 @@
 @property(readonly) NSString *uniqname;
 
 -(void)getFilesAtPath:(NSString *)path withCompletionHandler:(void (^)(NSArray *filenames))completion;
+-(void)deleteFileAtPath:(NSString *)path withCompletionHandler:(void (^)(BOOL success, NSError *error))completion;
 
 @end

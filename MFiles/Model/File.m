@@ -8,11 +8,12 @@
 
 #import "File.h"
 
+// MFile returns this as the 'type' property of a directory.
 NSString * const FileTypeDirectory = @"0000000dir";
 
 @implementation File
 
--(id)initWithJSObject:(NSDictionary *)obj
+-(id)initWithJSObject:(NSDictionary *)obj inDirectory:(NSString *)dir afsPrefix:(NSString *)prefix;
 {
     self = [super init];
     if (self)
@@ -21,8 +22,18 @@ NSString * const FileTypeDirectory = @"0000000dir";
         _date = [obj[@"date"] integerValue];
         _size = [obj[@"size"] integerValue];
         _type = obj[@"type"];
+        
+        _directory = dir;
+        _pathInAFS = prefix;
+        for (NSString *comp in dir.pathComponents)
+            _pathInAFS = [_pathInAFS stringByAppendingPathComponent:comp];
     }
     return self;
+}
+
+-(NSString *)path
+{
+    return [_directory stringByAppendingPathComponent:_title];
 }
 
 -(BOOL)isDirectory

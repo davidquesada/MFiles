@@ -72,6 +72,24 @@
 
 #pragma mark - UITableViewDelegate
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    File *file = _items[indexPath.row];
+    if (!file.isDirectory)
+        return UITableViewCellEditingStyleDelete;
+    return UITableViewCellEditingStyleNone;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    File *file = _items[indexPath.row];
+    
+    [[MFileClient sharedClient] deleteFileAtPath:file.path withCompletionHandler:^(BOOL success, NSError *error) {
+        
+        NSLog(@"Finished deleting file: %d, %@", success, error);
+    }];
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -88,6 +106,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"2"];
     
     cell.textLabel.text = item.title;
+    cell.accessoryType = (item.isDirectory) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     
     return cell;
 }
